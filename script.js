@@ -166,8 +166,6 @@ function showGameOver() {
   ctx.fillText('GAME OVER!', cnv.width / 2, cnv.height / 2);
 }
 
-
-
 function main() {
   anim = requestAnimationFrame(main);
   ctx.clearRect(0, 0, cnv.width, cnv.height);
@@ -211,31 +209,38 @@ function main() {
 document.addEventListener('keydown', ev => {
   if (gameOver) return;
 
-  /* TODO - Переписать на switch
-  swicth(ev.which) {}
-  */
- 
-  if (ev.which === 37 || ev.which === 39 /* Стрелки влево и вправо - смещение фигуры */) {
-    const col = ev.which === 37 ? tetromino.col - 1 : tetromino.col + 1;
-
-    if (validateMove(tetromino.matrix, tetromino.row, col)) tetromino.col = col;
-  }
-
-  if (ev.which === 38 /* Стрелка вверх - поворот фигуры */) {
-    const matrix = rotate(tetromino.matrix);
-    if (validateMove(matrix, tetromino.row, tetromino.col)) {
-      tetromino.matrix = matrix;
+  switch(ev.which) {
+    // Стрелка влево - смещение фигуры
+    case 37: {
+      const col = tetromino.col - 1; 
+      if (validateMove(tetromino.matrix, tetromino.row, col)) tetromino.col = col;
+      break;
     }
-  }
 
-  if(ev.which === 40 /* Стрелка вниз - ускорение падение */) {
-    const row = tetromino.row + 1;
-    if (!validateMove(tetromino.matrix, row, tetromino.col)) {
-      tetromino.row = row - 1;
-      placeTetromino();
-      return;
+    // Стрелка вверх - поворот фигуры
+    case 38: {
+      const matrix = rotate(tetromino.matrix);
+      if (validateMove(matrix, tetromino.row, tetromino.col)) tetromino.matrix = matrix;
+      break;
     }
-    tetromino.row = row;
+
+    // Стрелка вправо - смещение фигуры
+    case 39: {
+      const col = tetromino.col + 1; 
+      if (validateMove(tetromino.matrix, tetromino.row, col)) tetromino.col = col;
+      break;
+    }
+
+    // Стрелка вниз - ускорение падения фигуры
+    case 40: {
+      const row = tetromino.row + 1;
+      if(!validateMove(tetromino.matrix, row, tetromino.col)) {
+        placeTetromino();
+        return;
+      }
+      tetromino.row = row;
+      break;
+    }
   }
 });
 
