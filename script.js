@@ -9,7 +9,7 @@ let playfield = [];
 for (let row = -2; row < 20; row++) {
   playfield[row] = [];
 
-  for (let col = 0; col < 10; col++) {
+  for (col of Array(10).keys()) {
     playfield[row][col] = 0;
   }
 }
@@ -107,15 +107,15 @@ function getNextTetromino() {
 function rotate(matrix) {
   const N = matrix.length - 1;
   const ret = matrix.map((row, i) => 
-    row.map((val, j) => matrix[N - j][i])
+    row.map((j) => matrix[N - j][i])
   );
   
   return ret;
 }
 
 function validateMove(matrix, cellRow, cellCol) {
-  for (let row = 0; row < matrix.length; row++) {
-    for (let col = 0; col < matrix[row].length; col++) {
+  for (row of Array(matrix.length).keys()) {
+    for (col of Array(matrix[row].length).keys()) {
       if (matrix[row][col] && (
           // Выходит ли за границы поля
           cellCol + col < 0
@@ -130,8 +130,8 @@ function validateMove(matrix, cellRow, cellCol) {
 }
 
 function placeTetromino() {
-  for (let row = 0; row < tetromino.matrix.length; row++) {
-    for (let col = 0; col < tetromino.matrix[row].length; col++) {
+  for (row of Array(tetromino.matrix.length).keys()) {
+    for (col of Array(tetromino.matrix[row].length).keys()) {
       if (tetromino.matrix[row][col]) {
         if (tetromino.row + row < 0) return showGameOver()
         playfield[tetromino.row + row][tetromino.col + col] = tetromino.name;
@@ -170,8 +170,8 @@ function main() {
   anim = requestAnimationFrame(main);
   ctx.clearRect(0, 0, cnv.width, cnv.height);
 
-  for (let row = 0; row < 20; row++) {
-    for (let col = 0; col < 10; col++) {
+  for (row of Array(20).keys()) {
+    for (col of Array(10).keys()) {
       if (playfield[row][col]) {
         const name = playfield[row][col];
         ctx.fillStyle = colors[name];
@@ -195,8 +195,8 @@ function main() {
 
   ctx.fillStyle = colors[tetromino.name];
 
-  for (let row = 0; row < tetromino.matrix.length; row++) {
-    for (let col = 0; col < tetromino.matrix[row].length; col++) {
+  for (row of Array(tetromino.matrix.length).keys()) {
+    for (col of Array(tetromino.matrix[row].length).keys()) {
       if (tetromino.matrix[row][col]) {
         ctx.fillRect((tetromino.col + col) * grid,
           (tetromino.row + row) * grid,
@@ -244,4 +244,4 @@ document.addEventListener('keydown', ev => {
   }
 });
 
-anim = requestAnimationFrame(main);
+anim = requestAnimationFrame(main)
