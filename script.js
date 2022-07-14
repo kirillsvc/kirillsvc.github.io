@@ -107,7 +107,7 @@ function getNextTetromino() {
 function rotate(matrix) {
   const N = matrix.length - 1;
   const ret = matrix.map((row, i) => 
-    row.map((j) => matrix[N - j][i])
+    row.map((_, j) => matrix[N - j][i])
   );
   
   return ret;
@@ -244,4 +244,4 @@ document.addEventListener('keydown', ev => {
   }
 });
 
-anim = requestAnimationFrame(main)
+anim = requestAnimationFrame(main);
