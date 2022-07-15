@@ -1,3 +1,4 @@
+const scoreField = document.getElementById('score');
 const cnv = document.getElementById('game');
 const ctx = cnv.getContext('2d');
 
@@ -68,6 +69,10 @@ let count = 0;
 let tetromino = getNextTetromino();
 let anim = null;
 let gameOver = false;
+let score = 0;
+
+const updateScore = _ => scoreField.innerHTML = `Your score: ${score}`;
+updateScore()
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -144,6 +149,8 @@ function placeTetromino() {
       for (let r = row; r >= 0; r--) {
         for (let c = 0; c < playfield[r].length; c++) {
           playfield[r][c] = playfield[r-1][c];
+          score++;
+          updateScore()
         }
       }
     } else row--
@@ -158,9 +165,9 @@ function showGameOver() {
   ctx.fillStyle = 'black';
   ctx.globalAlpha = 1.5;
   ctx.fillRect(0, cnv.height / 2 - 30, cnv.width, 60);
-  ctx.globalAlpha = 0.75;
+  ctx.globalAlpha = 1.5;
   ctx.fillStyle = 'white';
-  ctx.font = '30px Arial';
+  ctx.font = '30px Segoe UI';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText('GAME OVER!', cnv.width / 2, cnv.height / 2);
