@@ -65,14 +65,17 @@ const colors = {
   'T': 'purple',
 };
 
+const localStorageName = 'highscore';
 let count = 0;
 let tetromino = getNextTetromino();
 let anim = null;
 let gameOver = false;
 let score = 0;
+let highScore = localStorage.getItem(localStorageName) == null ? 
+  0 : localStorage.getItem(localStorageName);
 
-const updateScore = _ => scoreField.innerHTML = `Your score: ${score}`;
-updateScore()
+const updateScore = _ => scoreField.innerHTML = `Лучший результат: ${highScore}\nВаш счет: ${score}`;
+updateScore();
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -127,7 +130,8 @@ function validateMove(matrix, cellRow, cellCol) {
           || cellCol + col >= playfield[0].length
           || cellRow + row >= playfield.length
           // Залезает ли на другие фигуры
-          || playfield[cellRow + row][cellCol + col])) return false
+          || playfield[cellRow + row][cellCol + col])
+       ) return false
     }
   }
 
@@ -150,9 +154,11 @@ function placeTetromino() {
         for (let c = 0; c < playfield[r].length; c++) {
           playfield[r][c] = playfield[r-1][c];
           score++;
-          updateScore()
         }
       }
+      highScore = Math.max(score, highScore);
+      localStorage.setItem(localStorageName, highScore);
+      updateScore();
     } else row--
   }
 
@@ -216,7 +222,7 @@ function main() {
 document.addEventListener('keydown', ev => {
   if (gameOver) return;
 
-  switch(ev.which) {
+  switch(ev.keyCode) {
     // Стрелка влево - смещение фигуры
     case 37: {
       const col = tetromino.col - 1; 
