@@ -73,7 +73,7 @@ let gameOver = false;
 let score = 0;
 let highScore = localStorage.getItem(localStorageName) ?? 0;
 
-const updateScore = _ => scoreField.innerHTML = `Лучший результат: ${highScore}\nВаш счет: ${score}`;
+const updateScore = _ => scoreField.innerHTML = `Лучший результат: ${highScore}<br>Ваш счет: ${score}`;
 updateScore();
 
 function getRandomInt(min, max) {
@@ -130,11 +130,11 @@ function validateMove(matrix, cellRow, cellCol) {
           || cellRow + row >= playfield.length
           // Залезает ли на другие фигуры
           || playfield[cellRow + row][cellCol + col])
-       ) return false
+       ) return false;
     }
   }
 
-  return true
+  return true;
 }
 
 function placeTetromino() {
@@ -158,7 +158,7 @@ function placeTetromino() {
       highScore = Math.max(score, highScore);
       localStorage.setItem(localStorageName, highScore);
       updateScore();
-    } else row--
+    } else row--;
   }
 
   tetromino = getNextTetromino();
