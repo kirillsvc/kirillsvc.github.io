@@ -9,6 +9,7 @@ h1 {
     font-family: 'Rubik', sans-serif;
     font-size: 150px;
     user-select: none;
+    margin-bottom: auto;
 }
 
 .main {
@@ -36,4 +37,12 @@ a.btnPlay {
 a.btnPlay:hover {
     color:#000000;
     background-color:#FFFFFF;
+}
+
+.links {
+    text-align: center;
+}
+
+.git, .tg {
+    display: inline-block;
 }

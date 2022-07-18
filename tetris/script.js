@@ -155,9 +155,13 @@ function placeTetromino() {
           score++;
         }
       }
-      highScore = Math.max(score, highScore);
+      if(score > highScore) {
+        scoreField.innerHTML = "Новый рекорд!";
+        highScore = score;
+        setTimeout(_ => updateScore(), 2000);
+      } else updateScore();
+
       localStorage.setItem(localStorageName, highScore);
-      updateScore();
     } else row--;
   }
 
