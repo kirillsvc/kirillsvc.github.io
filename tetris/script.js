@@ -71,8 +71,7 @@ let tetromino = getNextTetromino();
 let anim = null;
 let gameOver = false;
 let score = 0;
-let highScore = localStorage.getItem(localStorageName) == null ? 
-  0 : localStorage.getItem(localStorageName);
+let highScore = localStorage.getItem(localStorageName) ?? 0;
 
 const updateScore = _ => scoreField.innerHTML = `Лучший результат: ${highScore}\nВаш счет: ${score}`;
 updateScore();
