@@ -155,6 +155,7 @@ function placeTetromino() {
           score++;
         }
       }
+      
       if(score > highScore) {
         scoreField.innerHTML = "Новый рекорд!";
         highScore = score;
