@@ -9,7 +9,7 @@ h1 {
     font-family: 'Rubik', sans-serif;
     font-size: 150px;
     user-select: none;
-    margin-bottom: auto;
+    margin-bottom: 5%;
 }
 
 .main {
@@ -22,10 +22,10 @@ a.btnPlay {
     padding: 0.35em 1.2em;
     border: 0.1em solid #FFFFFF;
     margin: 0 auto;
-    border-radius: 0.12em;
+    border-radius: 0.5em;
     box-sizing: border-box;
     text-decoration: none;
-    font-family: 'Segoe UI';
+    font-family: Inter;
     font-weight: 300;
     color:#FFFFFF;
     text-align: center;
@@ -41,8 +41,10 @@ a.btnPlay:hover {
 
 .links {
     text-align: center;
+    user-select: none;
 }
 
 .git, .tg {
     display: inline-block;
+    margin-top: 35%;
 }
