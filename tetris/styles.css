@@ -4,7 +4,7 @@ html, body {
 }
 
 body {
-    background: #557A95;
+    background: lightslategrey;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -20,6 +20,7 @@ a,p {
     position: absolute;
     padding: 0.35em 1.2em;
     border: 0.1em solid #FFFFFF;
+    border-radius: 0.5em;
     box-sizing: border-box;
     text-decoration: none;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -41,12 +42,23 @@ a.btnBack {
     left: 10px;
 }
 
+a.btnReset {
+    top: 150px;
+    right: 10px;
+}
+
+a.btnReset:hover {
+    color: #000000;
+    background-color: red;
+    border: 0.1em solid red;
+}
+
 a.btnBack:hover, a.btnReload:hover {
     color: #000000;
     background-color: #FFFFFF;
 }
 
-p.score {
-    top: -10px;
-    right: 10px;
+a.score {
+    top: 10px;
+    right: 10px;;
 }

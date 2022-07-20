@@ -9,8 +9,10 @@
 </head>
 <body>
     <a href="../index.html" class="btnBack">Назад</a>
-    <a href="javascript:window.location.reload(true)" class="btnReload">Перезапустить</a>
-    <p class="score" id="score"></p>
+    <a href="javascript:this.location.reload()" class="btnReload">Перезапустить</a>
+    <a class="score" id="score"></a>
+    <a href="#" 
+        onclick="confirmReset()" class="btnReset">Сбросить рекорд</a>
     <canvas width="320" height="635" id="game"></canvas>
     <script src="script.js"></script>
 </body>

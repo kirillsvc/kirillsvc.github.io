@@ -65,15 +65,29 @@ const colors = {
   'T': 'purple',
 };
 
-const localStorageName = 'highscore';
+const highScoreScope = 'highscore', highLinesScope='highlines';
 let count = 0;
 let tetromino = getNextTetromino();
 let anim = null;
 let gameOver = false;
 let score = 0;
-let highScore = localStorage.getItem(localStorageName) ?? 0;
+let lines = 0;
+let highScore = localStorage.getItem(highScoreScope) ?? 0;
+let highLines = localStorage.getItem(highLinesScope) ?? 0;
 
-const updateScore = _ => scoreField.innerHTML = `Лучший результат: ${highScore}<br>Ваш счет: ${score}`;
+const confirmReset = () => {
+  const resp = confirm('Вы уверены?');
+  if (resp) {
+    highLines = 0;
+    highScore = 0;
+    localStorage.setItem(highLinesScope, 0);
+    localStorage.setItem(highScoreScope, 0);
+    this.location.reload();
+  }
+}
+
+const updateScore = () => scoreField.innerHTML = `Лучший результат: ${highScore}<br>Лучшее кол-во линий: ${highLines}
+  <br>Ваш счет: ${score}<br>Линии: ${lines}`;
 updateScore();
 
 function getRandomInt(min, max) {
@@ -155,21 +169,24 @@ function placeTetromino() {
           score++;
         }
       }
-      
-      if(score > highScore) {
+      lines++;
+      highLines = Math.max(highLines, lines);
+
+      if (score > highScore) {
         scoreField.innerHTML = "Новый рекорд!";
         highScore = score;
         setTimeout(_ => updateScore(), 2000);
       } else updateScore();
 
-      localStorage.setItem(localStorageName, highScore);
+      localStorage.setItem(highScoreScope, highScore);
+      localStorage.setItem(highLinesScope, highLines);
     } else row--;
   }
 
   tetromino = getNextTetromino();
 }
 
-function showGameOver() {
+const showGameOver = () => {
   cancelAnimationFrame(anim);
   gameOver = true;
   ctx.fillStyle = 'black';
@@ -180,7 +197,8 @@ function showGameOver() {
   ctx.font = '30px Segoe UI';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText('GAME OVER!', cnv.width / 2, cnv.height / 2);
+  ctx.fillText('Вы проиграли!', cnv.width / 2, cnv.height / 2);
+  setTimeout(_ => this.location.reload(), 4000);
 }
 
 function main() {
