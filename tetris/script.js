@@ -75,17 +75,6 @@ let lines = 0;
 let highScore = localStorage.getItem(highScoreScope) ?? 0;
 let highLines = localStorage.getItem(highLinesScope) ?? 0;
 
-const confirmReset = () => {
-  const resp = confirm('Вы уверены?');
-  if (resp) {
-    highLines = 0;
-    highScore = 0;
-    localStorage.setItem(highLinesScope, 0);
-    localStorage.setItem(highScoreScope, 0);
-    this.location.reload();
-  }
-}
-
 const updateScore = () => scoreField.innerHTML = `Лучший результат: ${highScore}<br>Лучшее кол-во линий: ${highLines}
   <br>Ваш счет: ${score}<br>Линии: ${lines}`;
 updateScore();

@@ -47,6 +47,11 @@ a.btnReset {
     right: 10px;
 }
 
+a.score {
+    top: 10px;
+    right: 10px;
+}
+
 a.btnReset:hover {
     color: #000000;
     background-color: red;
@@ -56,9 +61,4 @@ a.btnReset:hover {
 a.btnBack:hover, a.btnReload:hover {
     color: #000000;
     background-color: #FFFFFF;
-}
-
-a.score {
-    top: 10px;
-    right: 10px;
 }

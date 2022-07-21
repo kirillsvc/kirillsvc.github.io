@@ -41,10 +41,10 @@ a.btnPlay:hover {
 
 .links {
     text-align: center;
+    margin-top: 40%;
     user-select: none;
 }
 
 .git, .tg {
     display: inline-block;
-    margin-top: 35%;
 }
